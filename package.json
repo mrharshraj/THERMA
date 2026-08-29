@@ -1,0 +1,23 @@
+{
+  "name": "therma",
+  "version": "1.0.0",
+  "description": "THERMA - AI-Powered Heat Intelligence for Florida & Miami",
+  "private": true,
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "node scripts/build.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

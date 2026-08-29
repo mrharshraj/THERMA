@@ -1,0 +1,26 @@
+// Human-readable labels for Zoe's allowlisted actions (display only).
+
+export const ALLOWED_LABELS = {
+  navigate_to: 'navigate_to — open a screen',
+  select_location: 'select_location — switch global location',
+  set_map_layer: 'set_map_layer — change thermal layer',
+  zoom_map: 'zoom_map — zoom / fullscreen map',
+  reset_map: 'reset_map — reset map view',
+  open_zoe: 'open_zoe — open her panel',
+  close_zoe: 'close_zoe — close her panel',
+  open_sidebar: 'open_sidebar — show navigation',
+  close_sidebar: 'close_sidebar — collapse navigation',
+  run_heat_analysis: 'run_heat_analysis — refresh heat layers',
+  run_environment_analysis: 'run_environment_analysis — fetch parameters',
+  run_route_analysis: 'run_route_analysis — analyze corridors',
+  create_scenario: 'create_scenario — prepare what-if',
+  compare_locations: 'compare_locations — benchmark areas',
+  open_asset: 'open_asset — asset profile',
+  open_property: 'open_property — property profile',
+  open_facility: 'open_facility — facility profile',
+  open_alert: 'open_alert — alert context',
+  open_report: 'open_report — open a report',
+  generate_report: 'generate_report — build briefing',
+  open_decision_workspace: 'open_decision_workspace — decision center',
+  show_visualization: 'show_visualization — map/graph/flowchart',
+};

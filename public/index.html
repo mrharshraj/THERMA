@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Therma - AI-Powered Heat Intelligence</title>
+<!-- All assets are served locally (public/vendor, public/fonts) so the UI renders identically offline. -->
+<!-- Leaflet -->
+<link rel="stylesheet" href="/vendor/leaflet/leaflet.css"/>
+<!-- Tailwind CSS (vendored Play runtime) -->
+<script src="/vendor/tailwind.js"></script>
+<script id="tailwind-config">
+    /* ==========================================================================
+       THERMA design tokens — premium monochrome system.
+       Neutral black/white/grayscale for ALL UI chrome; heat color is reserved
+       exclusively for data (thermal bands, risk chips, exposure charts).
+       Structure mirrors the original Stitch token set so every screen keeps its
+       composition; only the color VALUES changed (P22 color-system pass).
+       darkMode stays "class" and <html> stays "light" — the base palette IS the
+       app palette, `dark:` variants remain inert.
+       ========================================================================== */
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    /* Semantic tokens are theme channels: rgb(var(--t-*) / <alpha-value>).
+                       Values live in styles.css :root — THERMA is dark-only. */
+                    "background": "rgb(var(--t-background) / <alpha-value>)",
+                    "surface": "rgb(var(--t-surface) / <alpha-value>)",
+                    "surface-dim": "rgb(var(--t-surface-dim) / <alpha-value>)",
+                    "surface-bright": "rgb(var(--t-surface-bright) / <alpha-value>)",
+                    "surface-container-lowest": "rgb(var(--t-surface-container-lowest) / <alpha-value>)",
+                    "surface-container-low": "rgb(var(--t-surface-container-low) / <alpha-value>)",
+                    "surface-container": "rgb(var(--t-surface-container) / <alpha-value>)",
+                    "surface-container-high": "rgb(var(--t-surface-container-high) / <alpha-value>)",
+                    "surface-container-highest": "rgb(var(--t-surface-container-highest) / <alpha-value>)",
+                    "surface-variant": "rgb(var(--t-surface-variant) / <alpha-value>)",
+                    "surface-tint": "rgb(var(--t-surface-tint) / <alpha-value>)",
+                    "outline": "rgb(var(--t-outline) / <alpha-value>)",
+                    "outline-variant": "rgb(var(--t-outline-variant) / <alpha-value>)",
+                    "on-surface": "rgb(var(--t-on-surface) / <alpha-value>)",
+                    "on-background": "rgb(var(--t-on-background) / <alpha-value>)",
+                    "on-surface-variant": "rgb(var(--t-on-surface-variant) / <alpha-value>)",
+                    "primary": "rgb(var(--t-primary) / <alpha-value>)",
+                    "on-primary": "rgb(var(--t-on-primary) / <alpha-value>)",
+                    "primary-fixed": "rgb(var(--t-primary-fixed) / <alpha-value>)",
+                    "primary-fixed-dim": "rgb(var(--t-primary-fixed-dim) / <alpha-value>)",
+                    "on-primary-fixed": "rgb(var(--t-on-primary-fixed) / <alpha-value>)",
+                    "on-primary-fixed-variant": "rgb(var(--t-on-primary-fixed-variant) / <alpha-value>)",
+                    "primary-container": "rgb(var(--t-primary-container) / <alpha-value>)",
+                    "on-primary-container": "rgb(var(--t-on-primary-container) / <alpha-value>)",
+                    "secondary": "rgb(var(--t-secondary) / <alpha-value>)",
+                    "on-secondary": "rgb(var(--t-on-secondary) / <alpha-value>)",
+                    "secondary-fixed": "rgb(var(--t-secondary-fixed) / <alpha-value>)",
+                    "secondary-fixed-dim": "rgb(var(--t-secondary-fixed-dim) / <alpha-value>)",
+                    "secondary-container": "rgb(var(--t-secondary-container) / <alpha-value>)",
+                    "on-secondary-container": "rgb(var(--t-on-secondary-container) / <alpha-value>)",
+                    "on-secondary-fixed": "rgb(var(--t-on-secondary-fixed) / <alpha-value>)",
+                    "on-secondary-fixed-variant": "rgb(var(--t-on-secondary-fixed-variant) / <alpha-value>)",
+                    "tertiary": "rgb(var(--t-tertiary) / <alpha-value>)",
+                    "on-tertiary": "rgb(var(--t-on-tertiary) / <alpha-value>)",
+                    "tertiary-fixed": "rgb(var(--t-tertiary-fixed) / <alpha-value>)",
+                    "tertiary-fixed-dim": "rgb(var(--t-tertiary-fixed-dim) / <alpha-value>)",
+                    "tertiary-container": "rgb(var(--t-tertiary-container) / <alpha-value>)",
+                    "on-tertiary-container": "rgb(var(--t-on-tertiary-container) / <alpha-value>)",
+                    "on-tertiary-fixed": "rgb(var(--t-on-tertiary-fixed) / <alpha-value>)",
+                    "on-tertiary-fixed-variant": "rgb(var(--t-on-tertiary-fixed-variant) / <alpha-value>)",
+                    "inverse-surface": "rgb(var(--t-inverse-surface) / <alpha-value>)",
+                    "inverse-on-surface": "rgb(var(--t-inverse-on-surface) / <alpha-value>)",
+                    "inverse-primary": "rgb(var(--t-inverse-primary) / <alpha-value>)",
+                    "error": "rgb(var(--t-error) / <alpha-value>)",
+                    "on-error": "rgb(var(--t-on-error) / <alpha-value>)",
+                    "error-container": "rgb(var(--t-error-container) / <alpha-value>)",
+                    "on-error-container": "rgb(var(--t-on-error-container) / <alpha-value>)",
+                    /* thermal band scale — data colors, theme-independent */
+                    "thermal-low": "#fed7aa",
+                    "thermal-mid": "#f97316",
+                    "thermal-high": "#b91c1c"
+                },
+                "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    /* [THERMA] Stitch stops at xl; extend the same tight scale so the
+                       rounded-2xl / rounded-3xl already used by public/ screens stay coherent. */
+                    "2xl": "0.75rem",
+                    "3xl": "1rem",
+                    /* [THERMA] Stitch exports full as 0.75rem, which would turn avatars and
+                       pills into squircles. Real pills are the documented intent (E4). */
+                    "full": "9999px"
+                },
+                "spacing": {
+                    "margin-mobile": "16px",
+                    "gutter": "16px",
+                    "unit": "4px",
+                    "margin-desktop": "32px",
+                    /* [THERMA] base app shell rail — the sidebar is fixed at this width and
+                       #main is offset by exactly the same value (see styles.css SHELL). */
+                    "panel-width": "240px",
+                    /* [THERMA] Zoe's overlay is a reading/conversation surface, not the rail —
+                       it keeps its own comfortable width independent of the 240px shell. */
+                    "zoe-width": "400px",
+                    /* [THERMA] t-shirt scale used throughout public/ screens */
+                    "xs": "4px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "xxl": "48px",
+                    "base": "8px",
+                    "container-padding": "24px"
+                },
+                "fontFamily": {
+                    "body-lg": ["Geist"],
+                    "display-lg": ["Geist"],
+                    "headline-md": ["Geist"],
+                    "data-mono": ["JetBrains Mono"],
+                    "body-md": ["Geist"],
+                    "headline-lg": ["Geist"],
+                    /* [THERMA] label + mobile-headline ramps used by public/ screens */
+                    "label-sm": ["Geist"],
+                    "label-md": ["Geist"],
+                    "headline-lg-mobile": ["Geist"],
+                    "sans": ["Geist", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+                    "mono": ["JetBrains Mono", "ui-monospace", "monospace"]
+                },
+                "fontSize": {
+                    "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                    "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                    "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                    "data-mono": ["14px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                    "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                    "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                    /* [THERMA] label + mobile-headline ramps used by public/ screens */
+                    "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                    "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                    "headline-lg-mobile": ["28px", { "lineHeight": "34px", "fontWeight": "600" }]
+                },
+                "boxShadow": {
+                    /* [THERMA] ambient card shadow; deepened for the dark palette */
+                    "ambient": "0 8px 32px rgba(0,0,0,0.32)"
+                }
+            }
+        }
+    }
+</script>
+<link rel="stylesheet" href="/styles.css"/>
+<script>
+</script>
+</head>
+<body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen w-full overflow-x-hidden antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+
+<!-- ============================= SPLASH ============================= -->
+<div id="splash" class="fixed inset-0 z-[999] flex flex-col items-center justify-center overflow-hidden bg-background">
+  <!-- Decorative technical texture. Stitch uses a remote placeholder image here (data-alt);
+       reproduced as a pure-CSS contour/grid pattern so THERMA stays offline-safe. -->
+  <div class="absolute inset-0 z-0 opacity-10 pointer-events-none splash-texture"></div>
+  <div class="relative z-10 flex flex-col items-center max-w-[400px] w-full px-gutter">
+    <!-- Logo -->
+    <div class="w-32 h-32 mb-margin-desktop shadow-xl rounded-2xl overflow-hidden bg-surface-container-low flex items-center justify-center">
+      <img src="/logo.png" alt="THERMA logo" class="w-full h-full object-cover mix-blend-screen opacity-90" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block';"/>
+      <span class="material-symbols-outlined text-tertiary logo-fallback hidden" style="font-size:72px; font-variation-settings:'FILL' 1;">thermostat</span>
+    </div>
+    <!-- Title -->
+    <h1 class="font-display-lg text-display-lg text-on-background text-center mb-unit tracking-tighter">THERMA</h1>
+    <!-- Subtitle -->
+    <p class="font-headline-md text-headline-md text-on-surface-variant text-center mb-margin-desktop opacity-80">Heat Intelligence Platform</p>
+    <!-- Initialization status -->
+    <div class="w-full flex flex-col items-center mt-margin-desktop">
+      <div class="flex items-center gap-2 text-primary font-data-mono text-data-mono mb-2 uppercase tracking-widest">
+        <span class="material-symbols-outlined text-[16px] animate-spin">autorenew</span>
+        <span id="splash-status">Initializing thermal intelligence...</span>
+      </div>
+      <!-- Progress bar -->
+      <div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden mt-unit relative">
+        <div id="splash-bar" class="h-full bg-tertiary w-0 rounded-full shadow-[0_0_10px_rgba(255,181,157,0.5)] transition-[width] duration-700 ease-out"></div>
+      </div>
+    </div>
+  </div>
+  <div class="absolute bottom-lg text-center w-full z-10">
+    <span class="font-data-mono text-[10px] text-outline/70 tracking-wider">Miami-Dade • Florida • FortyGuard Temperature API</span>
+  </div>
+</div>
+
+<!-- ============================= APP SHELL ============================= -->
+<!-- Document-flow shell: the page grows to its real content height and the
+     document scrolls. Sidebar + topbar are sticky so the chrome stays visible
+     while content scrolls under it. Fixed-workspace screens (Heat, CoolRoute,
+     Explorer, Decision Workspace, Zoe Workspace) opt into a viewport-locked
+     composition via .screen-fixed instead. -->
+<div id="app" class="flex min-h-screen w-full">
+
+  <!-- Mobile Top App Bar -->
+  <header id="mobile-topbar" class="md:hidden fixed top-0 left-0 right-0 flex justify-between items-center px-margin-mobile z-50 bg-surface/80 backdrop-blur-xl h-16 border-b border-outline-variant/10">
+    <button id="mobile-menu-btn" class="material-symbols-outlined text-on-surface-variant p-2 rounded-full hover:bg-surface-container-highest transition-all" aria-label="Menu">menu</button>
+    <div class="flex items-center gap-3">
+      <img src="/logo.png" alt="THERMA logo" class="h-7 w-auto object-contain" onerror="this.style.display='none'"/>
+      <span class="font-headline-md text-[20px] leading-none tracking-tight text-on-surface">THERMA</span>
+    </div>
+    <div class="flex items-center gap-1">
+      <button id="mobile-search-btn" data-search-open class="material-symbols-outlined text-on-surface-variant p-2 rounded-full hover:bg-surface-container-highest transition-all" aria-label="Search">search</button>
+    </div>
+  </header>
+
+  <!-- Mobile drawer scrim -->
+  <div id="drawer-scrim" class="md:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden"></div>
+
+  <!-- Desktop Side Navigation — the BASE APP SHELL, not a floating panel.
+       Fixed to the viewport so it touches top, left and bottom; #content is offset
+       by --rail-width (styles.css) so it never overlaps the workspace. -->
+  <nav id="sidebar" class="hidden md:flex flex-col md:fixed md:top-0 md:left-0 md:bottom-0 md:h-screen w-panel-width shrink-0 z-40 bg-surface-container-low border-r border-outline-variant/10 overflow-y-auto overflow-x-hidden transition-all duration-300">
+    <!-- Brand row -->
+    <div class="h-16 flex items-center px-margin-desktop shrink-0 gap-3 border-b border-outline-variant/5 mb-unit">
+      <img src="/logo.png" alt="THERMA logo" class="h-8 w-auto object-contain shrink-0" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='inline-block';"/>
+      <span class="material-symbols-outlined text-tertiary logo-fallback hidden shrink-0" style="font-size:28px; font-variation-settings:'FILL' 1;">thermostat</span>
+      <span class="brand-text font-headline-md text-headline-md tracking-tight text-on-surface">THERMA</span>
+    </div>
+    <!-- Grouped navigation. NOTE: no flex-1 here. The rail is 100vh tall, so a growing
+         nav region would push the System group and Focus View to the very bottom and
+         leave a large empty block between them — one continuous rail instead: the nav
+         ends after its last item and the following groups flow directly beneath it. -->
+    <div id="sidebar-nav" class="px-unit space-y-8 py-margin-desktop"></div>
+    <!-- System group -->
+    <div id="sidebar-footer" class="px-unit space-y-8 pb-margin-desktop"></div>
+    <!-- Focus/expand view (THERMA feature; Stitch has no equivalent control) -->
+    <div class="px-unit pb-margin-desktop shrink-0">
+      <button id="sidebar-collapse-btn" class="nav-item relative flex items-center px-gutter py-2 group transition-all text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface">
+        <span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100 shrink-0">open_in_full</span>
+        <span class="nav-label collapse-label truncate">Focus View</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Content column: Stitch glass top bar + main canvas -->
+  <div id="content" class="flex-1 flex flex-col min-w-0">
+
+    <!-- Desktop Top Bar (sticky — stays visible while the page scrolls) -->
+    <header id="topbar" class="hidden md:flex sticky top-0 z-30 shrink-0 h-16 items-center justify-between px-margin-desktop bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10">
+      <button data-search-open class="flex items-center bg-surface-container-high px-4 py-2 rounded-full border border-outline-variant/10 w-96 text-left hover:border-outline-variant/30 transition-all" aria-label="Open global search">
+        <span class="material-symbols-outlined text-on-surface-variant mr-2 text-[20px]">search</span>
+        <span class="text-on-surface-variant font-body-md truncate">Global Search...</span>
+        <span class="ml-auto font-data-mono text-[10px] text-outline shrink-0 pl-2">CTRL K</span>
+      </button>
+      <div class="flex items-center gap-gutter">
+        <button id="topbar-alerts-btn" class="relative w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all" aria-label="Active alerts">
+          <span class="material-symbols-outlined">notifications</span>
+          <span id="topbar-alert-dot" class="hidden absolute top-2 right-2 w-2 h-2 bg-error rounded-full ring-2 ring-surface"></span>
+        </button>
+        <div class="h-8 w-[1px] bg-outline-variant/20 mx-2"></div>
+        <button id="topbar-zoe-btn" class="flex items-center gap-3 pl-2 pr-1 py-1 rounded-full hover:bg-surface-container-highest/60 transition-all" aria-label="Toggle Zoe assistant">
+          <span class="text-right">
+            <span class="block text-body-md font-bold text-on-surface leading-tight">Zoe</span>
+            <span class="block text-[10px] text-primary uppercase font-data-mono tracking-tighter">AI Assistant</span>
+          </span>
+          <span class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/20 shrink-0">
+            <span class="material-symbols-outlined text-on-primary text-[24px]">person</span>
+          </span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Canvas — document flow: grows with content, page scrolls -->
+    <main id="main" class="flex-1 relative flex flex-col bg-surface pt-16 md:pt-0 pb-20 md:pb-0 min-w-0">
+      <div id="screen" class="flex-1 relative flex flex-col"></div>
+
+      <!-- Visualization Workspace (auto-hiding, viewport-docked) -->
+      <section id="viz-workspace" class="viz-workspace hidden fixed left-0 right-0 bottom-0 z-30 mx-auto max-w-5xl px-md pb-md pointer-events-none">
+        <div class="glass-panel rounded-2xl pointer-events-auto overflow-hidden">
+          <div class="flex items-center justify-between px-md py-xs border-b border-outline-variant/20">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="material-symbols-outlined text-tertiary text-[18px]" id="viz-icon">insights</span>
+              <span id="viz-title" class="text-label-md font-label-md font-bold truncate">Analysis</span>
+              <span id="viz-source-badge" class="source-badge"></span>
+            </div>
+            <div class="flex items-center gap-1">
+              <button id="viz-expand" class="p-1.5 rounded-lg hover:bg-surface-container-highest text-on-surface-variant" title="Expand"><span class="material-symbols-outlined text-[18px]">open_in_full</span></button>
+              <button id="viz-fullscreen" class="p-1.5 rounded-lg hover:bg-surface-container-highest text-on-surface-variant" title="Fullscreen"><span class="material-symbols-outlined text-[18px]">fullscreen</span></button>
+              <button id="viz-close" class="p-1.5 rounded-lg hover:bg-surface-container-highest text-on-surface-variant" title="Close"><span class="material-symbols-outlined text-[18px]">close</span></button>
+            </div>
+          </div>
+          <div id="viz-body" class="p-md max-h-[46vh] overflow-y-auto"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Zoe assistant panel (desktop).
+       Stitch's shell has no permanent right rail — Zoe lives in the top bar and opens
+       on demand. Rendered as an overlay so no screen layout has to reflow while Zoe
+       is acting on it; the screen behind stays visible and interactive. -->
+  <aside id="zoe-panel" class="hidden flex flex-col fixed top-0 right-0 h-full w-zoe-width max-w-full bg-surface-container-low border-l border-outline-variant/10 shadow-[-12px_0_40px_rgba(0,0,0,0.5)] z-40 overflow-hidden">
+    <div id="zoe-content" class="flex flex-col h-full"></div>
+  </aside>
+
+  <!-- Zoe mobile sheet -->
+  <div id="zoe-mobile" class="md:hidden fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" data-zoe-mobile-close></div>
+    <div class="absolute bottom-0 left-0 right-0 top-16 bg-surface-container-low rounded-t-3xl border-t border-outline-variant/10 flex flex-col overflow-hidden">
+      <div class="w-full flex justify-center pt-3 pb-1 cursor-pointer" data-zoe-mobile-close>
+        <div class="w-12 h-1.5 bg-outline-variant rounded-full"></div>
+      </div>
+      <div id="zoe-mobile-content" class="flex-1 flex flex-col overflow-hidden"></div>
+    </div>
+  </div>
+
+  <!-- Mobile Bottom Nav -->
+  <nav id="mobile-bottomnav" class="md:hidden fixed bottom-0 left-0 right-0 flex justify-around items-center bg-surface/90 backdrop-blur-xl h-20 px-2 pb-2 z-40 border-t border-outline-variant/10"></nav>
+</div>
+
+<!-- Onboarding shell — Splash and the Role Selector render HERE, outside the
+     application shell: no sidebar, no topbar, no mobile navigation, full
+     viewport. The router mounts #/role into this host and detaches #app
+     entirely (a real shell switch, not a CSS hide). -->
+<div id="onboarding-host" class="fixed inset-0 z-[90] overflow-y-auto bg-background" hidden></div>
+
+<!-- Global Search Modal -->
+<div id="search-modal" class="fixed inset-0 z-[900] hidden">
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" data-search-close></div>
+  <div class="relative max-w-2xl mx-auto mt-24 glass-panel rounded-2xl overflow-hidden">
+    <div class="flex items-center gap-3 px-md py-sm border-b border-outline-variant/20">
+      <span class="material-symbols-outlined text-on-surface-variant">search</span>
+      <input id="search-input" class="flex-1 bg-transparent border-none outline-none text-body-md text-on-surface placeholder-on-surface-variant/50" placeholder="Search Florida locations, screens, assets…" autocomplete="off"/>
+      <button data-search-close class="p-1.5 rounded-lg hover:bg-surface-container-highest text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">close</span></button>
+    </div>
+    <div id="search-results" class="max-h-[50vh] overflow-y-auto p-sm"></div>
+  </div>
+</div>
+
+<!-- Toasts -->
+<div id="toasts" class="fixed bottom-24 md:bottom-6 right-4 md:right-6 z-[950] flex flex-col gap-2 items-end pointer-events-none"></div>
+
+<!-- Scripts -->
+<script src="/vendor/leaflet/leaflet.js"></script>
+<script type="module" src="/app/core.js"></script>
+</body>
+</html>

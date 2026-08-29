@@ -1,0 +1,71 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={theme:{extend:{"colors":{"on-secondary-fixed":"#191c1d","on-surface":"#dce2f3","surface-bright":"#323946","error":"#ffb4ab","on-secondary-fixed-variant":"#454748","on-error":"#690005","surface-container-low":"#151c27","background":"#0c141f","surface-container-high":"#232a36","surface-container-highest":"#2e3541","secondary-fixed-dim":"#c5c7c8","tertiary":"#ffb59d","on-tertiary-fixed":"#390c00","on-secondary":"#2e3132","primary-fixed-dim":"#c8c6c5","on-primary-fixed-variant":"#474646","on-tertiary-container":"#e14700","surface-variant":"#2e3541","primary":"#c8c6c5","on-primary-fixed":"#1c1b1b","surface-container":"#19202b","tertiary-fixed":"#ffdbd0","surface-dim":"#0c141f","primary-fixed":"#e5e2e1","secondary-container":"#494c4d","secondary":"#c5c7c8","secondary-fixed":"#e1e3e4","on-primary":"#313030","outline-variant":"#444748","outline":"#8e9192","inverse-surface":"#dce2f3","on-primary-container":"#7e7d7d","surface-tint":"#c8c6c5","inverse-on-surface":"#2a313d","on-tertiary":"#5d1800","on-tertiary-fixed-variant":"#832600","surface-container-lowest":"#070e19","error-container":"#93000a","on-background":"#dce2f3","surface":"#0c141f","tertiary-container":"#290600","primary-container":"#121212","tertiary-fixed-dim":"#ffb59d","inverse-primary":"#5f5e5e","on-error-container":"#ffdad6","on-surface-variant":"#c4c7c7","on-secondary-container":"#babcbd"},"borderRadius":{"DEFAULT":"0.125rem"}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-surface"><main class="w-full"><div class="flex flex-col w-full h-full relative overflow-hidden items-center justify-center bg-background">
+<!-- Subtle Background Texture -->
+<div class="absolute inset-0 z-0 opacity-10 pointer-events-none" data-alt="Subtle, dark, abstract topographical contour lines, military-grade radar or thermal imaging grid pattern, deep charcoal gray and very faint orange accents, extremely low contrast, minimal and technical" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC-GAnGlv8THtqJRHFv6g05gVejc_OFK1ypeTKHyznzgR5UTTyW_l0cSL0IgikKx9VjGShUZUuRvAADirLHImPq2JY8EAjIel9TUpGHpFlhX7mWxUIsAcrQtB_JZbPgiGrFqSN5l70_kwI_re438BdKN2k2JVOEPLWvaN_U6XcMZK291avrTXDl0k2FeNxGZWG7lhJQtmB1tb0hJZjPoe5yGXCZjINcrENg5Fs5opNIKGxbsjK4hj7vag')"></div>
+<div class="relative z-10 flex flex-col items-center max-w-[400px] w-full px-gutter">
+<!-- Logo -->
+<div class="w-32 h-32 mb-margin-desktop shadow-xl rounded-2xl overflow-hidden bg-surface-container-low flex items-center justify-center">
+<img alt="THERMA Logo" class="w-full h-full object-cover mix-blend-screen opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaJ9l0tWKuwRGX8t9-6vK5FRM6uLQ3tP7Y0vW3SlxmjyuWZfpGHMTbrHTbdM5EqVC3GW-yNeVzRGGGUIyzV5JiM6fVKYdkZef3rMfrUmQxrb1jB0lXLSMOLUeTKiuzO9clDmP1XNZQ6cXdMqMPIfu8TT1JPzJHRxJ9RKuSLKOzVe6CCQzbkZySGa0sWZR_yiqs8b4tVbrZZR-G5Kh6k0GH4ffQdUI1GHQy1cJgAueMrkcIuipAZfKfcg"/>
+</div>
+<!-- Title -->
+<h1 class="font-display-lg text-display-lg text-on-background text-center mb-unit tracking-tighter">
+      THERMA
+    </h1>
+<!-- Subtitle -->
+<p class="font-headline-md text-headline-md text-on-surface-variant text-center mb-margin-desktop opacity-80">
+      Heat Intelligence Platform
+    </p>
+<!-- Initialization Status -->
+<div class="w-full flex flex-col items-center mt-margin-desktop">
+<div class="flex items-center gap-2 text-primary font-data-mono text-data-mono mb-2 uppercase tracking-widest">
+<span class="material-symbols-outlined text-[16px] animate-spin">autorenew</span>
+<span id="init-text">Initializing thermal intelligence...</span>
+</div>
+<!-- Progress Bar Container -->
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden mt-unit relative">
+<div class="h-full bg-tertiary w-0 rounded-full shadow-[0_0_10px_rgba(255,181,157,0.5)]" id="progress-bar"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const progressBar = document.getElementById('progress-bar');
+    const initText = document.getElementById('init-text');
+    let progress = 0;
+    
+    const messages = [
+      "Establishing geospatial uplink...",
+      "Calibrating thermal sensors...",
+      "Loading risk matrices...",
+      "System ready."
+    ];
+    let msgIndex = 0;
+
+    const interval = setInterval(() => {
+      progress += Math.random() * 15;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(interval);
+        setTimeout(() => {
+            initText.textContent = "Entering Command Center...";
+        }, 500);
+      }
+      
+      progressBar.style.width = `${progress}%`;
+      
+      if (progress > 30 && msgIndex === 0) {
+          msgIndex++;
+          initText.textContent = messages[msgIndex];
+      } else if (progress > 60 && msgIndex === 1) {
+          msgIndex++;
+          initText.textContent = messages[msgIndex];
+      } else if (progress >= 100 && msgIndex === 2) {
+          msgIndex++;
+          initText.textContent = messages[msgIndex];
+          initText.classList.add('text-tertiary');
+      }
+
+    }, 250);
+  });
+</script></main></body></html>

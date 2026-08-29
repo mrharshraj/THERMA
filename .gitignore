@@ -1,0 +1,36 @@
+node_modules/
+.env
+.DS_Store
+*.log
+
+# Credentials — read server-side only, never committed, never bundled.
+heatapi.txt
+gemini.txt
+
+# Build output
+dist/
+ui/dist/
+
+# Local tooling state (launch.json is shared; the local settings are not)
+.claude/settings.local.json
+
+# Pre-migration safety copies. Kept on disk as the recovery path for the shell /
+# report repair work; not part of the source tree.
+THERMA_BACKUP_*/
+_audit/
+_coolroute_backup_*/
+_phase3_backup/
+_prod_backup_*/
+_refine_backup_*/
+_step1_backup_*/
+
+# Scratch artifacts from the repair passes
+_audit$s.png
+_audit${s}.png
+_dark_triplets.json
+_report_test.js
+analysis.txt
+stitch_therma_heat_intelligence_platform*.zip
+
+# Corrupted pre-restore copy of api.js, kept only as a local reference
+backend/api.js.CLOBBERED-*

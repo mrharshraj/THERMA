@@ -1,0 +1,580 @@
+/* ============ 1. FONTS (vendored, offline-safe) ============ */
+/* Geist is the Stitch body/display family; JetBrains Mono backs every font-data-mono token. */
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/geist-var.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-var.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter-var.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: block;
+  src: url('/fonts/material-symbols.woff2') format('woff2');
+}
+
+/* Icon class — keeps Material Symbols working when Google CDN is unavailable */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ============ 2. RESET / BASE ============ */
+/* Mirrors the @layer base reset every Stitch screen ships. */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { min-height: 100%; height: auto; margin: 0; padding: 0; }
+body {
+  font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: #f5f5f5;              /* on-surface */
+  background-color: var(--surface);
+}
+main > :first-child { margin-top: 0 !important; }
+main > :last-child { margin-bottom: 0 !important; }
+img { max-width: 100%; display: block; }
+button { font-family: inherit; }
+
+/* ============ 3. SHELL GUARANTEES (work even if Tailwind JIT unavailable) ============ */
+/* The `hidden` attribute is authoritative for the two shells: when the router
+   detaches the app shell for #/role onboarding, Tailwind's .flex utility on
+   #app must not defeat it (and vice versa for the onboarding host / Zoe FAB). */
+#app[hidden], #onboarding-host[hidden], #zoe-fab[hidden] { display: none !important; }
+
+/* Layout structure always visible. NOTE: no flex-direction here — the shell is a ROW
+   (sidebar | content | Zoe) and an #id rule would outrank Tailwind's utilities.
+
+   The rail width lives in ONE place. --rail-width is declared on #app so the sidebar
+   and the content offset can never disagree, and Focus View flips it atomically for
+   both (sidebar.js toggles .rail-collapsed on #app alongside .collapsed on #sidebar). */
+#app {
+  --rail-width: 240px;
+  display: flex;
+  min-height: 100vh;
+  height: auto;         /* grows with content — the DOCUMENT scrolls */
+}
+#app.rail-collapsed { --rail-width: 72px; }
+
+/* The sidebar is the BASE APP SHELL, not a floating card: pinned to the viewport's
+   top, left and bottom edges, full height, no elevation, no radius, no offset. */
+#sidebar {
+  width: var(--rail-width);
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transform: none;
+}
+#main {
+  flex: 1;              /* padding lives on the screen scaffolds below */
+  min-width: 0;         /* let grid/flex children shrink instead of overflowing */
+  min-height: 100vh;
+  height: auto;
+  overflow: visible;    /* never clip screen content */
+}
+#splash { position: fixed; inset: 0; z-index: 999; background: var(--splash-bg); }
+#search-modal { position: fixed; inset: 0; z-index: 950; background: rgba(0,0,0,0.6); }
+#toasts { position: fixed; bottom: 24px; right: 24px; z-index: 999; }
+
+/* Splash technical texture — CSS stand-in for Stitch's remote decorative image */
+.splash-texture {
+  background-image:
+    repeating-linear-gradient(0deg, rgba(220,226,243,0.10) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(90deg, rgba(220,226,243,0.10) 0 1px, transparent 1px 64px),
+    radial-gradient(ellipse 60% 45% at 30% 35%, rgba(255,181,157,0.22), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 72% 68%, rgba(255,181,157,0.14), transparent 70%);
+}
+
+/* md breakpoint (768px) fallback — matches Tailwind md: prefix */
+@media (min-width: 768px) {
+  /* Base shell rail: fixed to the viewport so it touches top, left and bottom and
+     stays put while the document scrolls. Because it leaves normal flow, #content
+     is offset by exactly --rail-width — one value, no drift. */
+  #sidebar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+  }
+  /* The fixed sidebar is out of flow, so its width is reserved as PADDING on the
+     flex container #app. margin-left on the flex-1 #content child is swallowed by
+     the flex size algorithm (computes to 0); padding on the container is honored
+     and keeps #content's box width correct. One value drives both — --rail-width. */
+  #app { padding-left: var(--rail-width); transition: padding-left 300ms ease; }
+  #mobile-topbar { display: none; }
+  #mobile-bottomnav { display: none; }
+  #zoe-mobile { display: none; }
+}
+
+@media (max-width: 767px) {
+  #sidebar { display: none; }
+  /* Drawer open: openDrawer() adds .fixed. This ID+class selector (1,1,0) beats the
+     bare #sidebar rule (1,0,0), so the .flex utility openDrawer() toggles isn't
+     defeated by the resting `display:none` above. */
+  #sidebar.fixed { display: flex; }
+  #mobile-topbar { display: flex; }
+  #mobile-bottomnav { display: flex; }
+  /* #zoe-mobile ships with .hidden and is toggled open/closed by zoe.js. Only give it
+     flex WHILE OPEN — an unconditional `#zoe-mobile { display: flex }` (ID, 1,0,0) would
+     out-specify the .hidden utility (0,1,0) and pin the sheet permanently visible. */
+  #zoe-mobile:not(.hidden) { display: flex; }
+  /* The desktop Zoe overlay never applies on mobile — #zoe-mobile is the mobile surface. */
+  #zoe-panel { display: none !important; }
+}
+
+/* Zoe overlay is closed by default; zoe.js open()/close() toggle .hidden. */
+#zoe-panel.hidden { display: none !important; }
+
+/* Map hosting: leaflet container fills its parent */
+.leaflet-container { width: 100%; height: 100%; }
+
+/* ============ 4. SCREEN SCAFFOLDS ============ */
+/* Every routed screen renders inside one of these hosts (router.js resolve()).
+   The shell is document-flow: the page grows to its real content height and the
+   DOCUMENT scrolls (sidebar + topbar are sticky). Padding follows Stitch:
+   16px mobile (margin-mobile) / 32px desktop (margin-desktop).
+
+   - .screen-scroll : default — natural height, document scrolling.
+   - .screen-fixed  : viewport-locked workspace (Heat, CoolRoute, Explorer,
+     Decision Workspace, Zoe Workspace). Below lg it behaves like .screen-scroll
+     (stacked, page scrolls); at lg+ it locks to the space under the sticky
+     topbar and each internal panel scrolls in its own region. The lg breakpoint
+     matches the rails' own `hidden lg:flex` visibility. */
+.screen-scroll,
+.screen-fixed {
+  display: block;
+  padding: 16px;
+}
+@media (min-width: 768px) {
+  .screen-scroll,
+  .screen-fixed { padding: 32px; }   /* Stitch margin-desktop */
+}
+@media (min-width: 1024px) {
+  .screen-fixed {
+    height: calc(100vh - 4rem);   /* viewport minus sticky 64px topbar */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+}
+
+/* Visualization dock: fixed to the viewport (the page may be taller than the
+   viewport now), inset past the sticky sidebar on desktop. */
+#viz-workspace { position: fixed; }
+@media (min-width: 768px) { #viz-workspace { left: var(--rail-width); } }
+
+/* KPI tile row used by screen modules (was referenced but never defined —
+   left the Location screen's stat tiles stacked full-width). */
+.kpi-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+/* ============ ORIGINAL THERMA CSS (now on the Stitch dark palette) ============ */
+/* The `.dark .x` overrides that used to live here were the dark half of a light-first
+   sheet. The base palette is now Stitch dark, so those overrides were removed rather
+   than left as dead rules. If a real light palette is added later (theme.js
+   PALETTE_HAS_LIGHT_VARIANT), the light values go in a `.light .x` block instead. */
+
+:root {
+  /* Thermal band scale — shared by map.js polygons, chart bands and the legend.
+     Data colors: theme-independent. */
+  --band-cool: #2b7de9;
+  --band-mild: #57b1ff;
+  --band-warm: #fed7aa;
+  --band-hot: #f97316;
+  --band-extreme: #b91c1c;
+
+  /* ============ DARK (default) theme channels ============
+     Tailwind tokens point at --t-* (see index.html); these hex vars serve the
+     hand-written rules below. THERMA is dark-only. */
+  --t-background: 8 8 8;
+  --t-surface: 11 11 11;
+  --t-surface-dim: 8 8 8;
+  --t-surface-bright: 27 27 27;
+  --t-surface-container-lowest: 9 9 9;
+  --t-surface-container-low: 17 17 17;
+  --t-surface-container: 22 22 22;
+  --t-surface-container-high: 27 27 27;
+  --t-surface-container-highest: 32 32 32;
+  --t-surface-variant: 31 31 31;
+  --t-surface-tint: 245 245 245;
+  --t-outline: 48 48 48;
+  --t-outline-variant: 37 37 37;
+  --t-on-surface: 245 245 245;
+  --t-on-background: 245 245 245;
+  --t-on-surface-variant: 163 163 163;
+  --t-primary: 245 245 245;
+  --t-on-primary: 11 11 11;
+  --t-primary-fixed: 229 229 229;
+  --t-primary-fixed-dim: 163 163 163;
+  --t-on-primary-fixed: 22 22 22;
+  --t-on-primary-fixed-variant: 82 82 82;
+  --t-primary-container: 22 22 22;
+  --t-on-primary-container: 163 163 163;
+  --t-secondary: 163 163 163;
+  --t-on-secondary: 22 22 22;
+  --t-secondary-fixed: 229 229 229;
+  --t-secondary-fixed-dim: 163 163 163;
+  --t-secondary-container: 31 31 31;
+  --t-on-secondary-container: 204 204 204;
+  --t-on-secondary-fixed: 22 22 22;
+  --t-on-secondary-fixed-variant: 82 82 82;
+  --t-tertiary: 212 212 212;
+  --t-on-tertiary: 22 22 22;
+  --t-tertiary-fixed: 229 229 229;
+  --t-tertiary-fixed-dim: 163 163 163;
+  --t-tertiary-container: 31 31 31;
+  --t-on-tertiary-container: 212 212 212;
+  --t-on-tertiary-fixed: 22 22 22;
+  --t-on-tertiary-fixed-variant: 82 82 82;
+  --t-inverse-surface: 245 245 245;
+  --t-inverse-on-surface: 22 22 22;
+  --t-inverse-primary: 42 42 42;
+  --t-error: 255 93 93;
+  --t-on-error: 42 6 6;
+  --t-error-container: 58 10 10;
+  --t-on-error-container: 255 218 214;
+
+  --surface: #0b0b0b;
+  --surface-container-lowest: #090909;
+  --surface-container-low: #111111;
+  --surface-container: #161616;
+  --surface-container-high: #1b1b1b;
+  --surface-container-highest: #202020;
+  --on-surface: #f5f5f5;
+  --on-surface-variant: #a3a3a3;
+  --outline: #303030;
+  --outline-variant: #252525;
+  --primary: #f5f5f5;
+  --secondary-container: #1f1f1f;
+  --on-secondary-container: #cccccc;
+  --tertiary: #d4d4d4;
+  --glass-panel-bg: rgba(17, 17, 17, 0.88);
+  --glass-panel-border: rgba(48, 48, 48, 0.45);
+  --glass-chip-bg: rgba(27, 27, 27, 0.75);
+  --glass-chip-border: rgba(37, 37, 37, 0.6);
+  --map-ctrl-bg: rgba(22, 22, 22, 0.92);
+  --map-attribution-bg: rgba(11, 11, 11, 0.72);
+  --scroll-thumb: rgba(245, 245, 245, 0.14);
+  --scroll-thumb-hover: rgba(245, 245, 245, 0.26);
+  --skeleton-bg: rgba(245, 245, 245, 0.06);
+  --skeleton-shine: rgba(245, 245, 245, 0.07);
+  --field-bg: rgba(27, 27, 27, 0.8);
+  --field-border: rgba(37, 37, 37, 0.65);
+  --focus-ring: rgba(245, 245, 245, 0.16);
+  --splash-bg: #0b0b0b;
+
+  /* Flowchart / reasoning-chain system — premium monochrome only.
+     Hierarchy comes from surface elevation, border weight and typography,
+     never from hue. Consumers: flowchart.js (inline vars inside foreignObject
+     inherit these), badges and connectors in analytical chains. */
+  --flow-node-bg: #111111;            /* card background */
+  --flow-node-bg-dim: #0e0e0e;        /* assumption: slightly darker surface */
+  --flow-node-bg-elevated: #171717;   /* scenario output: elevated surface */
+  --flow-border: #2a2a2a;             /* standard node border */
+  --flow-border-strong: #e5e5e5;      /* data/output highlight border */
+  --flow-title: #f5f5f5;              /* primary text */
+  --flow-detail: #a3a3a3;             /* secondary text */
+  --flow-muted: #737373;              /* muted text */
+  --flow-icon: #e5e5e5;               /* monochrome icon */
+  --flow-icon-bg: rgba(245, 245, 245, 0.08);
+  --flow-icon-border: rgba(245, 245, 245, 0.16);
+  --flow-connector: #a3a3a3;          /* arrows */
+  --flow-connector-strong: #d4d4d4;
+  --flow-badge-bg: rgba(245, 245, 245, 0.06);
+  --flow-badge-text: #a3a3a3;
+  --flow-badge-border: rgba(245, 245, 245, 0.14);
+}
+
+/* NOTE: `html, body { height: 100% }` used to live here. It pinned the document to
+   exactly the viewport height, which is why long screens felt un-scrollable — the
+   base reset above intentionally uses min-height so the page grows to its REAL
+   content height and the document scrolls. Do not reintroduce a height clamp. */
+
+/* ---------- Glass panels ---------- */
+.glass-panel {
+  background-color: var(--glass-panel-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-panel-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.glass-chip {
+  background-color: var(--glass-chip-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-chip-border);
+}
+
+/* ---------- Buttons / interaction ---------- */
+.squishy-btn { transition: transform 120ms ease, box-shadow 160ms ease, background-color 160ms ease; }
+.squishy-btn:hover { transform: scale(1.03); }
+.squishy-btn:active { transform: scale(0.96); }
+.hover-lift { transition: transform 200ms ease, box-shadow 200ms ease; }
+.hover-lift:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55); }
+
+/* ---------- Sidebar nav rows ----------
+   Stitch: `flex items-center px-gutter py-2` — square corners, body-md, icon `mr-3`.
+   The utility classes are applied in sidebar.js; the rules below are the no-JIT
+   fallback so the shell still reads correctly before Tailwind's runtime injects. */
+.nav-item {
+  display: flex; align-items: center;
+  padding: 8px 16px; border-radius: 0;
+  color: var(--on-surface-variant); cursor: pointer; user-select: none;
+  transition: background-color 150ms ease, color 150ms ease;
+  width: 100%; text-align: left;
+  font-size: 16px; font-weight: 400; line-height: 1.5;
+}
+.nav-item:hover { background-color: var(--surface-container-highest); color: var(--on-surface); }
+.nav-item.active {
+  background-color: var(--secondary-container);
+  color: var(--on-secondary-container);
+  font-weight: 600;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+}
+/* Stitch active rows do not react to hover (they carry no hover: classes). */
+.nav-item.active:hover { background-color: var(--secondary-container); color: var(--on-secondary-container); }
+.nav-item.active .material-symbols-outlined { font-variation-settings: 'FILL' 1; opacity: 1; }
+.nav-item .nav-badge {
+  margin-left: auto; min-width: 18px; height: 18px; padding: 0 5px;
+  border-radius: 999px; font-size: 10px; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+.bottom-nav-item {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2px; flex: 1; padding: 6px 0; border-radius: 8px;
+  font-size: 10px; font-weight: 600; color: var(--on-surface-variant); cursor: pointer;
+}
+.bottom-nav-item.active { color: var(--on-surface); }
+.bottom-nav-item.active .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
+
+/* ---------- Ambient glow (used by hero/empty states) ---------- */
+.glow-overlay {
+  background:
+    radial-gradient(circle at 20% 30%, rgba(245, 245, 245, 0.05), transparent 40%),
+    radial-gradient(circle at 75% 70%, rgba(43, 125, 233, 0.10), transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(185, 28, 28, 0.08), transparent 45%);
+}
+.pulse-slow { animation: pulseSlow 6s ease-in-out infinite; }
+@keyframes pulseSlow { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.fade-up { animation: fadeUp 380ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.fade-in { animation: fadeIn 300ms ease both; }
+
+/* ---------- Source badges ---------- */
+.source-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+  padding: 2px 8px; border-radius: 999px; text-transform: uppercase; white-space: nowrap;
+}
+.source-badge.live { background: rgba(87, 177, 255, 0.16); color: #8cc6ff; }
+.source-badge.demo { background: rgba(245, 245, 245, 0.10); color: var(--tertiary); }
+.source-badge.analysis { background: rgba(245, 245, 245, 0.08); color: var(--on-surface-variant); }
+
+/* ---------- Band chips ---------- */
+.band-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px;
+  border: 1px solid rgba(245, 245, 245, 0.12); white-space: nowrap;
+}
+.band-dot { width: 8px; height: 8px; border-radius: 999px; flex: none; }
+
+/* ---------- Legend gradient (must mirror the --band-* scale above) ---------- */
+.thermal-scale {
+  height: 10px; border-radius: 999px;
+  background: linear-gradient(90deg, var(--band-cool), var(--band-mild) 26%, var(--band-warm) 50%, var(--band-hot) 76%, var(--band-extreme));
+}
+
+/* ---------- Skeletons ---------- */
+.skeleton {
+  position: relative; overflow: hidden;
+  background: var(--skeleton-bg); border-radius: 8px;
+}
+.skeleton::after {
+  content: ''; position: absolute; inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, var(--skeleton-shine), transparent);
+  animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+
+.spinner {
+  width: 22px; height: 22px; border-radius: 999px;
+  border: 3px solid rgba(245, 245, 245, 0.14); border-top-color: currentColor;
+  animation: spin 800ms linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Toasts ---------- */
+.toast {
+  pointer-events: auto; max-width: 340px;
+  animation: fadeUp 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ---------- Leaflet integration (Stitch basemap: "Dark Mono") ---------- */
+.leaflet-container {
+  font-family: 'Geist', 'Inter', sans-serif;
+  background: var(--surface);
+}
+.leaflet-popup-content-wrapper {
+  border-radius: 8px; box-shadow: 0 10px 34px rgba(0, 0, 0, 0.5);
+  padding: 2px; background: var(--surface-container); color: var(--on-surface);
+}
+.leaflet-popup-content { margin: 10px 14px; font-family: 'Geist', 'Inter', sans-serif; }
+.leaflet-popup-tip { background: var(--surface-container); }
+.leaflet-control-attribution {
+  font-size: 9px !important; border-radius: 8px 0 0 0;
+  background: var(--map-attribution-bg) !important; color: var(--outline) !important;
+}
+.leaflet-control-attribution a { color: var(--on-surface-variant) !important; }
+.map-pin-wrap { background: none; border: none; }
+.map-pin {
+  width: 26px; height: 26px; border-radius: 999px 999px 999px 2px;
+  transform: rotate(-45deg);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(245, 245, 245, 0.85);
+}
+.map-pin span { transform: rotate(45deg); font-size: 14px; color: #fff; }
+.map-pin.selected { outline: 3px solid rgba(245, 245, 245, 0.85); outline-offset: 2px; }
+
+.route-legend-swatch { width: 22px; height: 5px; border-radius: 999px; display: inline-block; }
+
+/* Map controls overlay */
+.map-ctrl {
+  width: 38px; height: 38px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--map-ctrl-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-panel-border);
+  color: var(--on-surface); cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  transition: transform 120ms ease, background-color 150ms ease;
+}
+.map-ctrl:hover { transform: scale(1.06); background: var(--surface-container-highest); }
+.map-ctrl.active { background: var(--secondary-container); color: var(--on-secondary-container); }
+
+/* ---------- Viz workspace ---------- */
+.viz-workspace { transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 280ms ease; transform: translateY(110%); opacity: 0; }
+.viz-workspace.shown { transform: translateY(0); opacity: 1; }
+.viz-workspace.expanded #viz-body { max-height: 62vh; }
+.viz-workspace.fullscreen {
+  inset: 0; max-width: none; padding: 0; z-index: 60;
+}
+.viz-workspace.fullscreen > div { height: 100%; border-radius: 0; border: none; }
+.viz-workspace.fullscreen #viz-body { max-height: none; height: calc(100% - 42px); }
+
+/* ---------- Zoe panel ---------- */
+.zoe-bubble-user {
+  background: var(--secondary-container); color: var(--on-surface);
+  border-radius: 8px 8px 2px 8px;
+}
+.zoe-bubble-bot {
+  background: var(--surface-container); color: var(--on-surface);
+  border-radius: 8px 8px 8px 2px;
+}
+.zoe-thinking span {
+  width: 6px; height: 6px; border-radius: 999px; background: currentColor;
+  display: inline-block; animation: bounceDot 1s infinite;
+}
+.zoe-thinking span:nth-child(2) { animation-delay: 140ms; }
+.zoe-thinking span:nth-child(3) { animation-delay: 280ms; }
+@keyframes bounceDot { 0%, 60%, 100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-4px); opacity: 1; } }
+
+.action-status {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+  background: rgba(245, 245, 245, 0.06); color: var(--tertiary);
+  animation: fadeIn 240ms ease both;
+}
+
+/* ---------- Scrollbars ---------- */
+/* Stitch hides scrollbars outright; kept as a near-invisible rail so long data panes
+   still show a scroll affordance. */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--scroll-thumb-hover); }
+
+/* ---------- Forms ---------- */
+input[type="range"] { accent-color: var(--tertiary); }
+.field-input {
+  width: 100%; border-radius: 8px; border: 1px solid var(--field-border);
+  background: var(--field-bg); padding: 9px 12px; font-size: 13.5px; color: var(--on-surface);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+.field-input::placeholder { color: rgba(196, 199, 199, 0.5); }
+.field-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(245, 245, 245, 0.16); }
+
+/* ---------- Accessibility ---------- */
+:focus-visible { outline: 2px solid var(--tertiary); outline-offset: 2px; border-radius: 4px; }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* Sidebar collapsed mode */
+#sidebar.collapsed { width: 72px; padding-left: 4px; padding-right: 4px; }
+#sidebar.collapsed .collapse-label,
+#sidebar.collapsed .nav-label,
+#sidebar.collapsed .brand-text,
+#sidebar.collapsed .nav-group-label { display: none; }
+#sidebar.collapsed .nav-item { justify-content: center; padding: 12px 0; }
+/* Beat Tailwind's .mr-3 on the icon (id selector wins) so collapsed rows centre. */
+#sidebar.collapsed .nav-item .material-symbols-outlined { margin-right: 0; }
+#sidebar.collapsed .nav-item .nav-badge { position: absolute; top: 4px; right: 8px; margin: 0; }
+#sidebar.collapsed .h-16 { justify-content: center; padding-left: 0; padding-right: 0; }
+
+/* Tables -> responsive */
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th {
+  text-align: left; font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--outline); padding: 8px 12px;
+  border-bottom: 1px solid rgba(37, 37, 37, 0.5); white-space: nowrap;
+}
+.data-table td { padding: 10px 12px; border-bottom: 1px solid rgba(37, 37, 37, 0.25); vertical-align: middle; }
+.data-table tr:hover td { background: rgba(32, 32, 32, 0.5); }
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* KPI number style */
+.kpi-value { font-weight: 700; letter-spacing: -0.02em; font-size: 32px; line-height: 1.2; }

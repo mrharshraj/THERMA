@@ -1,0 +1,351 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary-fixed":"#191c1d","on-surface":"#dce2f3","surface-bright":"#323946","error":"#ffb4ab","on-secondary-fixed-variant":"#454748","on-error":"#690005","surface-container-low":"#151c27","background":"#0c141f","surface-container-high":"#232a36","surface-container-highest":"#2e3541","secondary-fixed-dim":"#c5c7c8","tertiary":"#ffb59d","on-tertiary-fixed":"#390c00","on-secondary":"#2e3132","primary-fixed-dim":"#c8c6c5","on-primary-fixed-variant":"#474646","on-tertiary-container":"#e14700","surface-variant":"#2e3541","primary":"#c8c6c5","on-primary-fixed":"#1c1b1b","surface-container":"#19202b","tertiary-fixed":"#ffdbd0","surface-dim":"#0c141f","primary-fixed":"#e5e2e1","secondary-container":"#494c4d","secondary":"#c5c7c8","secondary-fixed":"#e1e3e4","on-primary":"#313030","outline-variant":"#444748","outline":"#8e9192","inverse-surface":"#dce2f3","on-primary-container":"#7e7d7d","surface-tint":"#c8c6c5","inverse-on-surface":"#2a313d","on-tertiary":"#5d1800","on-tertiary-fixed-variant":"#832600","surface-container-lowest":"#070e19","error-container":"#93000a","on-background":"#dce2f3","surface":"#0c141f","tertiary-container":"#290600","primary-container":"#121212","tertiary-fixed-dim":"#ffb59d","inverse-primary":"#5f5e5e","on-error-container":"#ffdad6","on-surface-variant":"#c4c7c7","on-secondary-container":"#babcbd"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin-mobile":"16px","gutter":"16px","unit":"4px","margin-desktop":"32px","panel-width":"400px"},"fontFamily":{"body-lg":["Geist"],"display-lg":["Geist"],"headline-md":["Geist"],"data-mono":["JetBrains Mono"],"body-md":["Geist"],"headline-lg":["Geist"]},"fontSize":{"body-lg":["18px",{"lineHeight":"1.6","fontWeight":"400"}],"display-lg":["48px",{"lineHeight":"1.1","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-md":["24px",{"lineHeight":"1.3","fontWeight":"600"}],"data-mono":["14px",{"lineHeight":"1.4","fontWeight":"500"}],"body-md":["16px",{"lineHeight":"1.5","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"1.2","fontWeight":"600"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet"/></head><body class="bg-surface font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-screen w-panel-width bg-surface-container-low border-r border-outline-variant/10 z-50 flex flex-col overflow-y-auto overflow-x-hidden transition-all"><div class="h-16 flex items-center px-margin-desktop shrink-0 gap-3 border-b border-outline-variant/5 mb-unit"><img alt="THERMA Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaJ9l0tWKuwRGX8t9-6vK5FRM6uLQ3tP7Y0vW3SlxmjyuWZfpGHMTbrHTbdM5EqVC3GW-yNeVzRGGGUIyzV5JiM6fVKYdkZef3rMfrUmQxrb1jB0lXLSMOLUeTKiuzO9clDmP1XNZQ6cXdMqMPIfu8TT1JPzJHRxJ9RKuSLKOzVe6CCQzbkZySGa0sWZR_yiqs8b4tVbrZZR-G5Kh6k0GH4ffQdUI1GHQy1cJgAueMrkcIuipAZfKfcg"/><span class="font-headline-md text-headline-md tracking-tight text-on-surface">THERMA</span></div><nav class="flex-1 px-unit space-y-8 py-margin-desktop" data-active-classes="bg-secondary-container text-on-secondary-container font-semibold shadow-inner"><section><h3 class="px-gutter mb-2 text-[10px] font-bold uppercase tracking-widest text-outline font-data-mono">Command</h3><div class="space-y-1"><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="overview" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">dashboard</span>Overview</a><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="heat-intelligence" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">thermostat</span>Heat Intelligence</a><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="coolroute" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">route</span>CoolRoute</a><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="map-explorer" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">map</span>Map Explorer</a></div></section><section><h3 class="px-gutter mb-2 text-[10px] font-bold uppercase tracking-widest text-outline font-data-mono">Intelligence</h3><div class="space-y-1"><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="environmental" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">eco</span>Environmental</a><a aria-current="page" class="flex items-center px-gutter py-2 group transition-all bg-secondary-container text-on-secondary-container font-semibold shadow-inner" data-path="portfolio" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">domain</span>Portfolio</a><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="urban-property" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">location_city</span>Urban & Property</a><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="risk-insurance" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">security</span>Risk & Insurance</a></div></section><section><h3 class="px-gutter mb-2 text-[10px] font-bold uppercase tracking-widest text-outline font-data-mono">System</h3><div class="space-y-1"><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="settings" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">settings</span>Settings</a><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="about" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">info</span>About</a></div></section></nav></aside><div class="pl-panel-width min-h-screen flex flex-col"><header class="fixed top-0 left-panel-width right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 border-b border-outline-variant/10"><div class="w-full h-full px-margin-desktop flex items-center justify-between"><div class="flex items-center bg-surface-container-high px-4 py-2 rounded-full border border-outline-variant/10 w-96"><span class="material-symbols-outlined text-on-surface-variant mr-2 text-[20px]">search</span><span class="text-on-surface-variant font-body-md">Global Search...</span></div><div class="flex items-center gap-gutter"><button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all"><span class="material-symbols-outlined">dark_mode</span></button><button class="relative w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all"><span class="material-symbols-outlined">notifications</span><div class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full ring-2 ring-surface"></div></button><div class="h-8 w-[1px] bg-outline-variant/20 mx-2"></div><div class="flex items-center gap-3 pl-2"><span class="text-right"><div class="text-body-md font-bold text-on-surface">Zoe</div><div class="text-[10px] text-primary uppercase font-data-mono tracking-tighter">AI Assistant</div></span><div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/20"><span class="material-symbols-outlined text-on-primary text-[24px]">person</span></div></div></div></div></header><main class="flex-1 pt-16 bg-surface"><div class="flex flex-col w-full h-full relative overflow-hidden bg-background">
+<!-- Ambient Background Elements -->
+<div class="absolute inset-0 pointer-events-none opacity-20">
+<div class="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-primary rounded-full blur-[120px] mix-blend-screen"></div>
+<div class="absolute bottom-[-20%] left-[-10%] w-[50%] h-[50%] bg-tertiary-fixed rounded-full blur-[150px] mix-blend-screen"></div>
+</div>
+<!-- Header Section (Nested within shell clearance) -->
+<div class="px-margin-desktop pt-margin-desktop pb-8 relative z-10 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-background mb-2">Portfolio Monitoring</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Aggregate intelligence across global assets. Monitoring thermal exposure and operational risk factors in real-time.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-surface-container hover:bg-surface-container-high text-on-surface font-headline-md text-body-md rounded-lg shadow-sm transition-all flex items-center gap-2 group">
+<span class="material-symbols-outlined text-[20px] text-outline group-hover:text-primary transition-colors">download</span>
+                Export Report
+            </button>
+<button class="px-6 py-3 bg-primary hover:bg-primary-fixed text-on-primary font-headline-md text-body-md rounded-lg shadow-md shadow-primary/20 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                Add Asset
+            </button>
+</div>
+</div>
+<!-- KPI Grid -->
+<div class="px-margin-desktop pb-margin-desktop grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter relative z-10">
+<!-- KPI 1 -->
+<div class="bg-surface-container-low rounded-xl p-6 shadow-md relative overflow-hidden group hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary-fixed"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="font-data-mono text-data-mono text-outline uppercase tracking-wider">Total Assets</span>
+<span class="material-symbols-outlined text-outline">domain</span>
+</div>
+<div class="font-display-lg text-headline-lg text-on-surface mb-2">1,248</div>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="font-data-mono text-data-mono">+2.4% vs last month</span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-container-low rounded-xl p-6 shadow-md relative overflow-hidden group hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+<div class="absolute top-0 left-0 w-1 h-full bg-error"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="font-data-mono text-data-mono text-outline uppercase tracking-wider">High Risk</span>
+<div class="w-3 h-3 rounded-full bg-error animate-pulse"></div>
+</div>
+<div class="font-display-lg text-headline-lg text-error mb-2">42</div>
+<div class="flex items-center gap-2 text-error">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+<span class="font-data-mono text-data-mono">Immediate Action Required</span>
+</div>
+<!-- Sparkline representation -->
+<div class="mt-4 h-8 w-full opacity-50 group-hover:opacity-100 transition-opacity">
+<svg class="w-full h-full text-error stroke-current" preserveaspectratio="none" viewbox="0 0 100 20">
+<path d="M0 15 Q 10 10 20 18 T 40 5 T 60 12 T 80 2 T 100 8" fill="none" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-container-low rounded-xl p-6 shadow-md relative overflow-hidden group hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+<div class="absolute top-0 left-0 w-1 h-full bg-tertiary"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="font-data-mono text-data-mono text-outline uppercase tracking-wider">Mod Risk</span>
+<div class="w-3 h-3 rounded-full bg-tertiary"></div>
+</div>
+<div class="font-display-lg text-headline-lg text-tertiary mb-2">315</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+<span class="font-data-mono text-data-mono">Stable trend</span>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface-container-low rounded-xl p-6 shadow-md relative overflow-hidden group hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="font-data-mono text-data-mono text-outline uppercase tracking-wider">Low Risk</span>
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+</div>
+<div class="font-display-lg text-headline-lg text-secondary mb-2">891</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="font-data-mono text-data-mono">Optimal</span>
+</div>
+</div>
+</div>
+<!-- Main Content Area: Split View -->
+<div class="px-margin-desktop pb-margin-desktop grid grid-cols-1 xl:grid-cols-12 gap-gutter relative z-10 flex-1 min-h-0">
+<!-- Left Column: Visualizations -->
+<div class="xl:col-span-4 flex flex-col gap-gutter">
+<!-- Risk Distribution Chart (Donut) -->
+<div class="bg-surface-container-low rounded-xl p-6 shadow-md flex-1 min-h-[300px] flex flex-col">
+<h3 class="font-headline-md text-body-lg text-on-surface mb-6">Risk Distribution</h3>
+<div class="relative flex-1 flex items-center justify-center">
+<!-- Inline SVG Donut Chart -->
+<svg class="w-48 h-48 transform -rotate-90" viewbox="0 0 100 100">
+<circle class="text-surface-container-highest" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-width="12"></circle>
+<!-- Low Risk (71%) -->
+<circle class="text-secondary" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="72.8" stroke-width="12"></circle>
+<!-- Mod Risk (25%) -->
+<circle class="origin-center" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="188.4" stroke-width="12" style="transform: rotate(255deg);"></circle>
+<!-- High Risk (4%) -->
+<circle class="origin-center" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="241.1" stroke-width="12" style="transform: rotate(345deg);"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+<span class="font-display-lg text-headline-md text-on-surface">1.2k</span>
+<span class="font-data-mono text-data-mono text-outline">Assets</span>
+</div>
+</div>
+<!-- Legend -->
+<div class="flex justify-center gap-6 mt-6">
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-error"></div><span class="font-data-mono text-[12px] text-on-surface-variant">High (3%)</span></div>
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-tertiary"></div><span class="font-data-mono text-[12px] text-on-surface-variant">Mod (25%)</span></div>
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-secondary"></div><span class="font-data-mono text-[12px] text-on-surface-variant">Low (72%)</span></div>
+</div>
+</div>
+<!-- Heat Exposure Trend -->
+<div class="bg-surface-container-low rounded-xl p-6 shadow-md flex-1 min-h-[300px] flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-body-lg text-on-surface">Thermal Exposure Trend</h3>
+<select class="bg-surface-container-highest text-on-surface font-data-mono text-[12px] px-3 py-1 rounded-md outline-none cursor-pointer">
+<option>Last 7 Days</option>
+<option>Last 30 Days</option>
+</select>
+</div>
+<div class="relative flex-1 w-full h-full">
+<!-- Inline SVG Line Chart Placeholder -->
+<div class="absolute inset-0 flex items-end">
+<svg class="w-full h-full preserve-3d" preserveaspectratio="none" viewbox="0 0 100 50">
+<defs>
+<lineargradient id="gradientTrend" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="var(--tw-colors-tertiary)" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="var(--tw-colors-surface-container-low)" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Grid Lines -->
+<line class="text-outline-variant/20" stroke="currentColor" stroke-width="0.5" x1="0" x2="100" y1="10" y2="10"></line>
+<line class="text-outline-variant/20" stroke="currentColor" stroke-width="0.5" x1="0" x2="100" y1="25" y2="25"></line>
+<line class="text-outline-variant/20" stroke="currentColor" stroke-width="0.5" x1="0" x2="100" y1="40" y2="40"></line>
+<!-- Area Fill -->
+<path d="M0 45 L 10 35 L 20 40 L 30 20 L 40 25 L 50 15 L 60 30 L 70 10 L 80 20 L 90 5 L 100 15 L 100 50 L 0 50 Z" fill="url(#gradientTrend)"></path>
+<!-- Line -->
+<path class="text-tertiary" d="M0 45 L 10 35 L 20 40 L 30 20 L 40 25 L 50 15 L 60 30 L 70 10 L 80 20 L 90 5 L 100 15" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+</div>
+<!-- X-Axis Labels -->
+<div class="flex justify-between mt-2 px-1 font-data-mono text-[10px] text-outline">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+<span>Sun</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Asset List -->
+<div class="xl:col-span-8 bg-surface-container-low rounded-xl shadow-md flex flex-col overflow-hidden">
+<!-- Controls Bar -->
+<div class="p-4 border-b border-outline-variant/10 flex flex-col sm:flex-row justify-between items-center gap-4 bg-surface-container-high/50">
+<!-- Search -->
+<div class="relative w-full sm:w-72">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full bg-surface-container-lowest text-on-surface font-body-md pl-10 pr-4 py-2 rounded-lg outline-none focus:ring-1 focus:ring-primary transition-all placeholder:text-outline-variant" placeholder="Search assets by name or ID..." type="text"/>
+</div>
+<!-- Filters & Sort -->
+<div class="flex gap-2 w-full sm:w-auto">
+<button class="px-3 py-2 bg-surface-container hover:bg-surface-container-highest text-on-surface font-data-mono text-[12px] rounded-lg flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+                        Filter
+                    </button>
+<button class="px-3 py-2 bg-surface-container hover:bg-surface-container-highest text-on-surface font-data-mono text-[12px] rounded-lg flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[16px]">sort</span>
+                        Sort: Risk Desc
+                    </button>
+</div>
+</div>
+<!-- Table Container -->
+<div class="flex-1 overflow-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low sticky top-0 z-10 shadow-sm">
+<tr>
+<th class="px-6 py-4 font-data-mono text-[10px] uppercase text-outline tracking-wider font-bold">Asset Name</th>
+<th class="px-6 py-4 font-data-mono text-[10px] uppercase text-outline tracking-wider font-bold">Location</th>
+<th class="px-6 py-4 font-data-mono text-[10px] uppercase text-outline tracking-wider font-bold">Temp (Avg)</th>
+<th class="px-6 py-4 font-data-mono text-[10px] uppercase text-outline tracking-wider font-bold">Heat Risk</th>
+<th class="px-6 py-4 font-data-mono text-[10px] uppercase text-outline tracking-wider font-bold">Exposure (Hrs)</th>
+<th class="px-6 py-4 font-data-mono text-[10px] uppercase text-outline tracking-wider font-bold text-right">Priority</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<!-- Row 1 (High Risk) -->
+<tr class="hover:bg-surface-container-highest/50 transition-colors group cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-md overflow-hidden shrink-0">
+<div class="w-full h-full bg-cover bg-center" data-location="Phoenix, AZ" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDFh4IJew5lawZd7SiS7f0NCHUSWMwGXoc7QUMawwk2UgxWIdkU7lGUxVAtoQ42c3Ho3m-8qiKXfYt8e1rhBh92a6U40DIRW1SsU7egAefqj701HQ-gsYLqN4VkdHl78M4C6lK9TjkvoavyDjXOoYGykgRTTI02YUlMWpUYILLCXxuc69lfkireyhJsHfwyb4qTmreZLk5O-ah-8nqmJXIkRqHXtpNMQWSgDVENoKIEIByTlmQX6iuD0A')"></div>
+</div>
+<div>
+<div class="font-headline-md text-[14px] text-on-surface group-hover:text-primary transition-colors">Data Center Alpha</div>
+<div class="font-data-mono text-[10px] text-outline">ID: DC-PHX-01</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-[14px] text-on-surface-variant">Phoenix, AZ</td>
+<td class="px-6 py-4 font-data-mono text-[14px] text-on-surface">42.5°C</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error/10 text-error font-data-mono text-[12px]">
+<div class="w-1.5 h-1.5 rounded-full bg-error"></div>
+                                    Critical
+                                </span>
+</td>
+<td class="px-6 py-4 font-data-mono text-[14px] text-on-surface">14.2</td>
+<td class="px-6 py-4 text-right">
+<button class="w-8 h-8 inline-flex items-center justify-center rounded-full bg-error/20 text-error hover:bg-error/30 transition-colors">
+<span class="material-symbols-outlined text-[16px]">priority_high</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 (High Risk) -->
+<tr class="hover:bg-surface-container-highest/50 transition-colors group cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-md overflow-hidden shrink-0">
+<div class="w-full h-full bg-cover bg-center" data-location="Dubai, UAE" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBTT7uvR34XbfaRVAfBTyuWszDXMmvJaM5gbrbbkuLMpEUj-jQi5pB7dRGUYf4iVzxVA-rgVZfmRC0eSVPeIaRjjRv56D6eYYgBmUsTFJr-PMAEapFrYQ6ajQ5cRLbigXm1nLHYn8wF4oITB8Up4lDFz74uknQq3haPvBWCEBY-EttAakfeZ-aLlnLUfWr5S5apc9ya1vyH14cTzt6qaqPEagTvIX4e8Ycrd3QTpc2PMvQBqnmMj7pJHw')"></div>
+</div>
+<div>
+<div class="font-headline-md text-[14px] text-on-surface group-hover:text-primary transition-colors">Logistics Hub DXB</div>
+<div class="font-data-mono text-[10px] text-outline">ID: WH-DXB-99</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-[14px] text-on-surface-variant">Dubai, UAE</td>
+<td class="px-6 py-4 font-data-mono text-[14px] text-on-surface">45.1°C</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error/10 text-error font-data-mono text-[12px]">
+<div class="w-1.5 h-1.5 rounded-full bg-error"></div>
+                                    High
+                                </span>
+</td>
+<td class="px-6 py-4 font-data-mono text-[14px] text-on-surface">18.5</td>
+<td class="px-6 py-4 text-right">
+<button class="w-8 h-8 inline-flex items-center justify-center rounded-full bg-surface-container text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[16px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 (Mod Risk) -->
+<tr class="hover:bg-surface-container-highest/50 transition-colors group cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-md overflow-hidden shrink-0">
+<div class="w-full h-full bg-cover bg-center" data-location="Madrid, Spain" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD1lLhx3IMr2uwRk3rNcG7EscSPm45PbyTDLuZRbOHe8Jo_6wJWzTu8bxiN1TjDhq4EAfaYZLUF23KveBr-5RE7Uez4lsy-pCBTyGNdluZ8rapolvqQPPjAWQVPFYJcg3vSRNvARbyCze-nbOC5mYZhn-taniNe3ZTKF1pclDSZSkynycioBZ9KfJtm1W_t6dVi2pZz0-tcyN4WL5WY1bxE58ypxtogWI_2P05mwTdRMIiQUzZjeMq0eQ')"></div>
+</div>
+<div>
+<div class="font-headline-md text-[14px] text-on-surface group-hover:text-primary transition-colors">Euro HQ Complex</div>
+<div class="font-data-mono text-[10px] text-outline">ID: OF-MAD-02</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-[14px] text-on-surface-variant">Madrid, Spain</td>
+<td class="px-6 py-4 font-data-mono text-[14px] text-on-surface">36.2°C</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-tertiary/10 text-tertiary font-data-mono text-[12px]">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+                                    Elevated
+                                </span>
+</td>
+<td class="px-6 py-4 font-data-mono text-[14px] text-on-surface">6.4</td>
+<td class="px-6 py-4 text-right">
+<button class="w-8 h-8 inline-flex items-center justify-center rounded-full bg-surface-container text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[16px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 (Low Risk) -->
+<tr class="hover:bg-surface-container-highest/50 transition-colors group cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-md overflow-hidden shrink-0">
+<div class="w-full h-full bg-cover bg-center" data-location="London, UK" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD1RMqHQtq8rIU0ZKVGevNlsYhE9SkgS3kjxY1b3zpRv5v5w_wMDSf93YeI8xG3a0JmTjLaYS83XhqUsO6K0XUHFknYSn3sMrklWTks5lHDc3gLT2Iui-_x8TiTFSdTR7zQkjYzb-sNTZWdu00VbXOHVEHl_RQ9LYVI1MAFq66mH2L3nP0bgwiCkcLU-MnwMWsxqZMjvwwDKF7xXnEEAXvFKccZ_N2Pv6J4y3XlhZH-PoPsZIW-X9_pEw')"></div>
+</div>
+<div>
+<div class="font-headline-md text-[14px] text-on-surface group-hover:text-primary transition-colors">Thames Facility</div>
+<div class="font-data-mono text-[10px] text-outline">ID: MF-LON-11</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-[14px] text-on-surface-variant">London, UK</td>
+<td class="px-6 py-4 font-data-mono text-[14px] text-on-surface">24.8°C</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary/10 text-secondary font-data-mono text-[12px]">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary"></div>
+                                    Normal
+                                </span>
+</td>
+<td class="px-6 py-4 font-data-mono text-[14px] text-on-surface">0.0</td>
+<td class="px-6 py-4 text-right">
+<button class="w-8 h-8 inline-flex items-center justify-center rounded-full bg-surface-container text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[16px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 (Low Risk) -->
+<tr class="hover:bg-surface-container-highest/50 transition-colors group cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-md overflow-hidden shrink-0">
+<div class="w-full h-full bg-cover bg-center" data-location="Seattle, WA" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2XoHBgiZ-RBpJ-f6Dtz1yXJ9EJsBby1IhWAWZtBa4OhU-y4V8uIrzFBpcFaPShjgNHuV7LviHrM4h0RrUvzcFV-23ejRQWt1HeZ7SEcdbMQMA-io1CCg_2xtMY9ztIOUEs5QmtW00WS0n3vmclypvs632h-NIW4fTElujazzVLUQhDdRpp6KEn1aeQrx8uyqKypmMNR6X6E43CeB8wU0eCDqlAXkVoPlMl8XnEUugaDTFVKDtR6jf4w')"></div>
+</div>
+<div>
+<div class="font-headline-md text-[14px] text-on-surface group-hover:text-primary transition-colors">Pacific Tech Center</div>
+<div class="font-data-mono text-[10px] text-outline">ID: TC-SEA-05</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-[14px] text-on-surface-variant">Seattle, WA</td>
+<td class="px-6 py-4 font-data-mono text-[14px] text-on-surface">21.5°C</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary/10 text-secondary font-data-mono text-[12px]">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary"></div>
+                                    Normal
+                                </span>
+</td>
+<td class="px-6 py-4 font-data-mono text-[14px] text-on-surface">0.0</td>
+<td class="px-6 py-4 text-right">
+<button class="w-8 h-8 inline-flex items-center justify-center rounded-full bg-surface-container text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[16px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="p-4 border-t border-outline-variant/10 bg-surface-container-low flex justify-between items-center text-on-surface-variant font-data-mono text-[12px]">
+<span>Showing 1-5 of 1,248</span>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded bg-surface-container flex items-center justify-center hover:bg-surface-container-highest transition-colors opacity-50 cursor-not-allowed">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-surface-container flex items-center justify-center hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

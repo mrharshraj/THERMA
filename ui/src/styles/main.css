@@ -1,0 +1,249 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    overscroll-behavior: none;
+  }
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Material Symbols */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+/* Leaflet overrides */
+.leaflet-container {
+  font-family: inherit;
+}
+
+.leaflet-tooltip {
+  background: #1a1b1f;
+  border: 1px solid #444748;
+  color: #dce2f3;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+
+.leaflet-tooltip::before {
+  border-top-color: #1a1b1f;
+}
+
+/* Custom scrollbar for panels */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #444748;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #8e9192;
+}
+
+/* Animations */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.pulse-slow {
+  animation: pulse-slow 2s ease-in-out infinite;
+}
+
+/* Glass panel effect */
+.glass-panel {
+  background: rgba(12, 20, 31, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(136, 145, 146, 0.1);
+}
+
+.glass-chip {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(136, 145, 146, 0.15);
+}
+
+/* Squishy button effect */
+.squishy-btn:active {
+  transform: scale(0.97);
+}
+
+.squishy-btn {
+  transition: transform 0.1s ease;
+}
+
+/* Hover lift */
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  transition: all 0.2s ease;
+}
+
+/* Spinner */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #444748;
+  border-top-color: #c8c6c5;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Toast */
+.toast {
+  animation: slide-in 0.3s ease-out;
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Source badge */
+.source-badge {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.source-badge.demo {
+  background: #ffb59d33;
+  color: #ffb59d;
+}
+
+.source-badge.live {
+  background: #2b7de933;
+  color: #2b7de9;
+}
+
+.source-badge.therma-analysis {
+  background: #7c3aed33;
+  color: #a78bfa;
+}
+
+/* Action status chip */
+.action-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(136, 145, 146, 0.15);
+  color: #c4c7c7;
+}
+
+.action-status .material-symbols-outlined.check_circle {
+  color: #22c55e;
+}
+
+.action-status .material-symbols-outlined.error {
+  color: #ef4444;
+}
+
+/* Viz workspace */
+.viz-workspace {
+  max-height: 60vh;
+}
+
+.viz-workspace.hidden {
+  display: none;
+}
+
+/* Router outlet */
+#screen {
+  min-height: 0;
+}
+
+/* Mobile drawer */
+#drawer-scrim {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  #drawer-scrim.visible {
+    display: block;
+  }
+}
+
+/* Screen transitions */
+.screen-enter {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.screen-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.25s ease;
+}
+
+.screen-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.screen-exit-active {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.2s ease;
+}
+
+/* Theme transition */
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* Focus visible */
+:focus-visible {
+  outline: 2px solid #c8c6c5;
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background: #c8c6c5;
+  color: #1c1b1b;
+}

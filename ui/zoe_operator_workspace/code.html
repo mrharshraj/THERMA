@@ -1,0 +1,251 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary-fixed":"#191c1d","on-surface":"#dce2f3","surface-bright":"#323946","error":"#ffb4ab","on-secondary-fixed-variant":"#454748","on-error":"#690005","surface-container-low":"#151c27","background":"#0c141f","surface-container-high":"#232a36","surface-container-highest":"#2e3541","secondary-fixed-dim":"#c5c7c8","tertiary":"#ffb59d","on-tertiary-fixed":"#390c00","on-secondary":"#2e3132","primary-fixed-dim":"#c8c6c5","on-primary-fixed-variant":"#474646","on-tertiary-container":"#e14700","surface-variant":"#2e3541","primary":"#c8c6c5","on-primary-fixed":"#1c1b1b","surface-container":"#19202b","tertiary-fixed":"#ffdbd0","surface-dim":"#0c141f","primary-fixed":"#e5e2e1","secondary-container":"#494c4d","secondary":"#c5c7c8","secondary-fixed":"#e1e3e4","on-primary":"#313030","outline-variant":"#444748","outline":"#8e9192","inverse-surface":"#dce2f3","on-primary-container":"#7e7d7d","surface-tint":"#c8c6c5","inverse-on-surface":"#2a313d","on-tertiary":"#5d1800","on-tertiary-fixed-variant":"#832600","surface-container-lowest":"#070e19","error-container":"#93000a","on-background":"#dce2f3","surface":"#0c141f","tertiary-container":"#290600","primary-container":"#121212","tertiary-fixed-dim":"#ffb59d","inverse-primary":"#5f5e5e","on-error-container":"#ffdad6","on-surface-variant":"#c4c7c7","on-secondary-container":"#babcbd"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin-mobile":"16px","gutter":"16px","unit":"4px","margin-desktop":"32px","panel-width":"400px"},"fontFamily":{"body-lg":["Geist"],"display-lg":["Geist"],"headline-md":["Geist"],"data-mono":["JetBrains Mono"],"body-md":["Geist"],"headline-lg":["Geist"]},"fontSize":{"body-lg":["18px",{"lineHeight":"1.6","fontWeight":"400"}],"display-lg":["48px",{"lineHeight":"1.1","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-md":["24px",{"lineHeight":"1.3","fontWeight":"600"}],"data-mono":["14px",{"lineHeight":"1.4","fontWeight":"500"}],"body-md":["16px",{"lineHeight":"1.5","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"1.2","fontWeight":"600"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"></head><body class="bg-surface font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-screen w-panel-width bg-surface-container-low border-r border-outline-variant/10 z-50 flex flex-col overflow-y-auto overflow-x-hidden transition-all"><div class="h-16 flex items-center px-margin-desktop shrink-0 gap-3 border-b border-outline-variant/5 mb-unit"><img alt="THERMA Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaJ9l0tWKuwRGX8t9-6vK5FRM6uLQ3tP7Y0vW3SlxmjyuWZfpGHMTbrHTbdM5EqVC3GW-yNeVzRGGGUIyzV5JiM6fVKYdkZef3rMfrUmQxrb1jB0lXLSMOLUeTKiuzO9clDmP1XNZQ6cXdMqMPIfu8TT1JPzJHRxJ9RKuSLKOzVe6CCQzbkZySGa0sWZR_yiqs8b4tVbrZZR-G5Kh6k0GH4ffQdUI1GHQy1cJgAueMrkcIuipAZfKfcg"><span class="font-headline-md text-headline-md tracking-tight text-on-surface">THERMA</span></div><nav class="flex-1 px-unit space-y-8 py-margin-desktop" data-active-classes="bg-secondary-container text-on-secondary-container font-semibold shadow-inner"><section><h3 class="px-gutter mb-2 text-[10px] font-bold uppercase tracking-widest text-outline font-data-mono">Command</h3><div class="space-y-1"><a aria-current="page" class="flex items-center px-gutter py-2 group transition-all bg-secondary-container text-on-secondary-container font-semibold shadow-inner" data-path="overview" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">dashboard</span>Overview</a><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="heat-intelligence" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">thermostat</span>Heat Intelligence</a><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="coolroute" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">route</span>CoolRoute</a><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="map-explorer" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">map</span>Map Explorer</a></div></section><section><h3 class="px-gutter mb-2 text-[10px] font-bold uppercase tracking-widest text-outline font-data-mono">Intelligence</h3><div class="space-y-1"><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="environmental" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">eco</span>Environmental</a><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="portfolio" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">domain</span>Portfolio</a><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="urban-property" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">location_city</span>Urban &amp; Property</a><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="risk-insurance" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">security</span>Risk &amp; Insurance</a></div></section><section><h3 class="px-gutter mb-2 text-[10px] font-bold uppercase tracking-widest text-outline font-data-mono">System</h3><div class="space-y-1"><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="settings" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">settings</span>Settings</a><a class="flex items-center px-gutter py-2 group text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all" data-path="about" href="#"><span class="material-symbols-outlined mr-3 text-[20px] opacity-70 group-hover:opacity-100">info</span>About</a></div></section></nav></aside><div class="pl-panel-width min-h-screen flex flex-col"><header class="fixed top-0 left-panel-width right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 border-b border-outline-variant/10"><div class="w-full h-full px-margin-desktop flex items-center justify-between"><div class="flex items-center bg-surface-container-high px-4 py-2 rounded-full border border-outline-variant/10 w-96"><span class="material-symbols-outlined text-on-surface-variant mr-2 text-[20px]">search</span><span class="text-on-surface-variant font-body-md">Global Search...</span></div><div class="flex items-center gap-gutter"><button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all"><span class="material-symbols-outlined">dark_mode</span></button><button class="relative w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all"><span class="material-symbols-outlined">notifications</span><div class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full ring-2 ring-surface"></div></button><div class="h-8 w-[1px] bg-outline-variant/20 mx-2"></div><div class="flex items-center gap-3 pl-2"><span class="text-right"><div class="text-body-md font-bold text-on-surface">Zoe</div><div class="text-[10px] text-primary uppercase font-data-mono tracking-tighter">AI Assistant</div></span><div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/20"><span class="material-symbols-outlined text-on-primary text-[24px]">person</span></div></div></div></div></header><main class="flex-1 pt-16 bg-surface"><div class="flex flex-col w-full">
+<div class="w-full flex-1 p-gutter grid grid-cols-12 gap-gutter min-h-[870px]">
+<!-- LEFT: ZOE OPERATOR WORKSPACE -->
+<div class="col-span-12 lg:col-span-3 flex flex-col bg-surface-container shadow-xl rounded-xl overflow-hidden relative">
+<!-- Zoe Header -->
+<div class="bg-primary px-4 py-3 flex items-center justify-between shadow-md z-10 text-on-primary">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+<span class="font-data-mono text-data-mono uppercase tracking-widest font-bold">Zoe Workspace</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-surface opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-surface"></span>
+</span>
+<span class="font-data-mono text-[10px] uppercase font-bold text-on-primary">Active</span>
+</div>
+</div>
+<!-- Chat History -->
+<div class="flex-1 overflow-y-auto p-4 flex flex-col gap-6" id="chat-container"><!-- User Request -->
+<div class="self-end w-4/5 bg-surface-container-highest text-on-surface p-3 rounded-xl shadow-sm rounded-tr-none border border-outline-variant/10">
+  <p class="font-body-md text-body-md">Assess thermal risk and infrastructure vulnerability for Urban Zone 4.</p>
+</div>
+
+<!-- Zoe Analysis Phase -->
+<div class="self-start w-11/12 flex gap-3">
+  <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-lg shrink-0 text-on-primary">
+    <span class="material-symbols-outlined text-[18px]">psychology</span>
+  </div>
+  <div class="flex flex-col gap-2">
+    <div class="bg-surface-container-low text-on-surface p-3 rounded-xl shadow-sm rounded-tl-none border border-outline-variant/5">
+      <div class="flex items-center gap-2 mb-2 text-primary">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+        </span>
+        <span class="font-data-mono text-[10px] uppercase font-bold tracking-widest">Live Analysis</span>
+      </div>
+      <p class="font-body-md text-body-md mb-3">Cross-referencing surface peak data (142°F) with substation load capacities. Zone 4 is currently operating at 92% thermal threshold.</p>
+      
+      <!-- System Insight Block -->
+      <div class="bg-surface-container-highest/50 border-l-2 border-tertiary p-3 rounded-r-lg mb-3">
+        <div class="text-[10px] font-data-mono uppercase text-tertiary mb-1">System Insight</div>
+        <p class="text-[13px] text-on-surface-variant leading-relaxed">Predictive modeling suggests a 14% temperature increase over the next 24h. Substation Alpha is at critical risk of cascading failure.</p>
+      </div>
+
+      <div class="bg-surface-container-highest p-3 rounded-lg shadow-inner flex flex-col gap-2 relative overflow-hidden">
+        <div class="flex items-center justify-between text-on-surface-variant font-data-mono text-data-mono">
+          <span class="">Model Convergence</span>
+          <span id="progress-text" class="">94%</span>
+        </div>
+        <div class="w-full bg-surface h-1 rounded-full overflow-hidden">
+          <div class="bg-tertiary h-full rounded-full transition-all duration-300" id="progress-bar" style="width: 94%;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Zoe Proposal -->
+<div class="self-start w-11/12 flex gap-3">
+  <div class="w-8 h-8 rounded-full bg-transparent flex items-center justify-center shrink-0"></div>
+  <div class="bg-surface-container-low text-on-surface p-3 rounded-xl shadow-sm rounded-tl-none border border-outline-variant/5">
+    <p class="font-body-md text-body-md">I recommend immediate deployment of reflective cool-coatings on Substation Alpha and Transit Hub Beta. This could reduce localized surface peaks by up to 18°F.</p>
+  </div>
+</div></div>
+<!-- Suggested Commands & Input -->
+<div class="p-4 bg-surface-container shadow-[0_-4px_20px_rgba(0,0,0,0.2)] flex flex-col gap-3 z-10">
+<div class="flex flex-wrap gap-2"><button class="bg-surface-variant text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-colors font-data-mono text-[11px] px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1 uppercase tracking-wider">
+  <span class="material-symbols-outlined text-[14px]">layers</span>
+  Simulate Cool Coating Impact
+</button>
+<button class="bg-surface-variant text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-colors font-data-mono text-[11px] px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1 uppercase tracking-wider">
+  <span class="material-symbols-outlined text-[14px]">search_insights</span>
+  Identify Vulnerable Substations
+</button>
+<button class="bg-surface-variant text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-colors font-data-mono text-[11px] px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1 uppercase tracking-wider">
+  <span class="material-symbols-outlined text-[14px]">description</span>
+  Export Risk Report
+</button></div>
+<div class="bg-surface-container-lowest flex items-center px-4 py-2 rounded-full shadow-inner">
+<input class="bg-transparent flex-1 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none" placeholder="Command Zoe..." type="text">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">mic</span>
+</button>
+</div>
+</div>
+</div>
+<!-- CENTER: DYNAMIC VISUALIZATION -->
+<div class="col-span-12 lg:col-span-6 bg-surface-container-lowest rounded-xl shadow-xl relative overflow-hidden flex flex-col group">
+<!-- Map Background -->
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-100 group-hover:scale-105 opacity-80 mix-blend-luminosity" data-location="Phoenix, Arizona"></div>
+<!-- Thermal Overlay Gradient -->
+<div class="absolute inset-0 bg-gradient-to-br from-error/20 via-surface/40 to-surface/90 pointer-events-none"></div>
+<!-- Simulated Map Scanning Line -->
+<div class="absolute left-0 right-0 h-[2px] bg-tertiary shadow-[0_0_15px_3px_#ffb59d] opacity-50 z-10 pointer-events-none" id="scanner" style="top: 102%;"></div>
+<!-- Center UI Overlays -->
+<div class="relative z-20 p-6 flex-1 flex flex-col justify-between pointer-events-none">
+<div class="flex justify-between items-start">
+<div class="bg-surface/80 backdrop-blur-md px-4 py-2 rounded-lg shadow-md pointer-events-auto flex items-center gap-3">
+<span class="material-symbols-outlined text-error animate-pulse">crisis_alert</span>
+<div>
+<div class="font-data-mono text-[10px] uppercase text-on-surface-variant font-bold tracking-widest">Active Focus</div>
+<div class="font-headline-md text-headline-md text-on-surface">Zone 4 Thermal Model</div>
+</div>
+</div>
+<div class="flex flex-col gap-2 pointer-events-auto">
+<button class="w-10 h-10 bg-surface/80 backdrop-blur-md text-on-surface flex items-center justify-center rounded-lg shadow-md hover:bg-primary hover:text-on-primary transition-all"><span class="material-symbols-outlined">zoom_in</span></button>
+<button class="w-10 h-10 bg-surface/80 backdrop-blur-md text-on-surface flex items-center justify-center rounded-lg shadow-md hover:bg-primary hover:text-on-primary transition-all"><span class="material-symbols-outlined">zoom_out</span></button>
+<button class="w-10 h-10 bg-surface/80 backdrop-blur-md text-on-surface flex items-center justify-center rounded-lg shadow-md hover:bg-primary hover:text-on-primary transition-all"><span class="material-symbols-outlined">layers</span></button>
+</div>
+</div>
+<!-- Predictive Graph Overlay -->
+<div class="bg-surface/90 backdrop-blur-xl p-4 rounded-xl shadow-2xl pointer-events-auto w-full max-w-xl">
+<div class="flex justify-between items-end mb-4">
+<div>
+<div class="font-data-mono text-[10px] uppercase text-outline font-bold tracking-widest mb-1">Temperature Projection (48h)</div>
+<div class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+                112°F <span class="material-symbols-outlined text-error text-[20px]">trending_up</span>
+</div>
+</div>
+<div class="font-data-mono text-data-mono text-tertiary bg-tertiary/10 px-2 py-1 rounded shadow-sm">+14% vs Baseline</div>
+</div>
+<!-- Inline SVG Line Chart -->
+<svg class="w-full h-24 overflow-visible" preserveAspectRatio="none" viewBox="0 0 400 100">
+<path class="text-tertiary/30" d="M 0 80 Q 50 80 100 60 T 200 40 T 300 10 T 400 20" fill="none" stroke="currentColor" stroke-dasharray="4 4" stroke-width="2"></path>
+<path class="text-tertiary drop-shadow-[0_0_8px_rgba(255,181,157,0.8)]" d="M 0 80 Q 50 80 100 60 T 200 40 T 300 10 T 400 20" fill="none" id="live-line" stroke="currentColor" stroke-dasharray="500" stroke-dashoffset="500" stroke-width="3">
+<animate attributeName="stroke-dashoffset" dur="2s" fill="freeze" from="500" to="0"></animate>
+</path>
+<circle class="text-error animate-ping" cx="300" cy="10" fill="currentColor" r="4"></circle>
+<circle class="text-error" cx="300" cy="10" fill="currentColor" r="4"></circle>
+</svg>
+<div class="flex justify-between mt-2 font-data-mono text-[10px] text-on-surface-variant uppercase">
+<span class="">Now</span>
+<span class="">+12h</span>
+<span class="">+24h</span>
+<span class="text-error font-bold">Peak Risk</span>
+<span class="">+48h</span>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT: CONTEXT & ASSETS -->
+<div class="col-span-12 lg:col-span-3 flex flex-col gap-gutter h-full">
+<!-- Current Status Card -->
+<div class="bg-surface-container shadow-lg rounded-xl p-5 flex flex-col gap-4 relative overflow-hidden">
+<div class="absolute -right-10 -top-10 w-32 h-32 bg-error/10 rounded-full blur-2xl"></div>
+<div>
+<h2 class="font-data-mono text-[10px] uppercase text-outline font-bold tracking-widest mb-1">Contextual Status</h2>
+<div class="font-headline-lg text-headline-lg text-on-surface">Severe Risk</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<div class="font-data-mono text-[10px] uppercase text-on-surface-variant">Ambient Max</div>
+<div class="font-headline-md text-headline-md text-error">109°F</div>
+</div>
+<div>
+<div class="font-data-mono text-[10px] uppercase text-on-surface-variant">Surface Peak</div>
+<div class="font-headline-md text-headline-md text-tertiary">142°F</div>
+</div>
+</div>
+</div>
+<!-- Vulnerable Assets List -->
+<div class="flex-1 bg-surface-container shadow-lg rounded-xl p-5 flex flex-col">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-data-mono text-[10px] uppercase text-outline font-bold tracking-widest">Selected Assets</h3>
+<span class="font-data-mono text-[10px] bg-surface-container-highest text-on-surface px-2 py-0.5 rounded shadow-sm">4 Identified</span>
+</div>
+<div class="flex flex-col gap-3 overflow-y-auto pr-1">
+<!-- Asset 1 -->
+<div class="bg-surface-container-high p-3 rounded-lg shadow-md flex items-center justify-between group cursor-pointer transition-transform hover:-translate-y-1">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-error/20 text-error flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</div>
+<div>
+<div class="font-body-md text-body-md text-on-surface font-semibold line-clamp-1">Substation Alpha</div>
+<div class="font-data-mono text-[10px] text-on-surface-variant">Power Grid • ID 992-A</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-data-mono text-data-mono text-error font-bold">94%</div>
+<div class="font-data-mono text-[9px] uppercase text-on-surface-variant">Vuln</div>
+</div>
+</div>
+<!-- Asset 2 -->
+<div class="bg-surface-container-high p-3 rounded-lg shadow-md flex items-center justify-between group cursor-pointer transition-transform hover:-translate-y-1">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-tertiary/20 text-tertiary flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-[20px]">directions_bus</span>
+</div>
+<div>
+<div class="font-body-md text-body-md text-on-surface font-semibold line-clamp-1">Transit Hub Beta</div>
+<div class="font-data-mono text-[10px] text-on-surface-variant">Public Trans • ID 104-T</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-data-mono text-data-mono text-tertiary font-bold">72%</div>
+<div class="font-data-mono text-[9px] uppercase text-on-surface-variant">Vuln</div>
+</div>
+</div>
+<!-- Asset 3 -->
+<div class="bg-surface-container-high p-3 rounded-lg shadow-md flex items-center justify-between group cursor-pointer transition-transform hover:-translate-y-1 opacity-70">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-secondary/20 text-secondary flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-[20px]">water_drop</span>
+</div>
+<div>
+<div class="font-body-md text-body-md text-on-surface font-semibold line-clamp-1">Pump Station 4</div>
+<div class="font-data-mono text-[10px] text-on-surface-variant">Water Infra • ID 441-W</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-data-mono text-data-mono text-secondary font-bold">41%</div>
+<div class="font-data-mono text-[9px] uppercase text-on-surface-variant">Vuln</div>
+</div>
+</div>
+</div>
+<button class="mt-4 w-full bg-on-surface text-surface py-2 rounded-lg font-data-mono text-data-mono uppercase font-bold tracking-wider hover:opacity-90 transition-opacity shadow-md">
+          Execute Protocol
+        </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple interactions for UI liveliness
+  document.addEventListener('DOMContentLoaded', () => {
+    // Show Zoe's delayed message
+    setTimeout(() => {
+      const msg = document.getElementById('delayed-msg');
+      if (msg) msg.style.opacity = '1';
+    }, 2000);
+
+    // Map scanning line animation
+    const scanner = document.getElementById('scanner');
+    let pos = 0;
+    let dir = 1;
+    if (scanner) {
+      setInterval(() => {
+        pos += dir * 2;
+        if (pos > 100 || pos < 0) dir *= -1;
+        scanner.style.top = `${pos}%`;
+      }, 50);
+    }
+  });
+</script></main></div>
+
+</body></html>
