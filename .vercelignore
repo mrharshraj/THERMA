@@ -1,2 +1,8 @@
 ui/
 ui/dist/
+
+# Backend-only secrets — never upload to a deploy.
+# .vercelignore overrides .gitignore for Vercel CLI uploads, so these must be
+# listed here explicitly even though .gitignore already excludes them.
+heatapi.txt
+gemini.txt
