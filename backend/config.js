@@ -14,8 +14,10 @@ function readCredential(fileName) {
   }
 }
 
-const fortyguardKey = readCredential('heatapi.txt');
-const geminiKey = readCredential('gemini.txt');
+// Credentials resolve from the environment first (Render/CI), with the local
+// credential files kept as the fallback for development.
+const fortyguardKey = process.env.FORTYGUARD_API_KEY || readCredential('heatapi.txt');
+const geminiKey = process.env.GEMINI_API_KEY || readCredential('gemini.txt');
 
 const credentials = {
   fortyguardAvailable: !!fortyguardKey,
@@ -29,10 +31,10 @@ const credentials = {
 };
 
 if (!credentials.fortyguardAvailable) {
-  console.error('[THERMA] WARNING: heatapi.txt is missing or empty. FortyGuard heat intelligence will be unavailable.');
+  console.error('[THERMA] WARNING: No FortyGuard key (FORTYGUARD_API_KEY or heatapi.txt missing/empty). FortyGuard heat intelligence will be unavailable.');
 }
 if (!credentials.geminiAvailable) {
-  console.error('[THERMA] WARNING: gemini.txt is missing or empty. Zoe will run in local intelligence mode.');
+  console.error('[THERMA] WARNING: No Gemini key (GEMINI_API_KEY or gemini.txt missing/empty). Zoe will run in local intelligence mode.');
 }
 
 module.exports = { credentials, ROOT };
